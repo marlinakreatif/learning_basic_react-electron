@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import videos from "./assets/videos";
 
 function App() {
+  const [currentSong, setCurrentSong] = useState(videos.songs[0]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h4>Selamat Datang Semua</h4>
+      <video key={currentSong.video} width="400" controls autoPlay={true}>
+        <source src={currentSong.video} type="video/mp4" />
+        Your browser does not support HTML video.
+      </video>
+      <hr />
+      {videos.songs.map((song, index) => {
+        return (
+          <button
+            key={index}
+            onClick={() => {
+              console.log("SONG", song);
+              setCurrentSong(song);
+            }}
+          >
+            {song.title}
+          </button>
+        );
+      })}
     </div>
   );
 }
